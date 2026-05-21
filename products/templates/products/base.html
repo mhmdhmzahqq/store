@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إدارة المتجر</title>
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+</head>
+<body>
+    <div class="glass-panel">
+        
+        <nav>
+            {% if user.is_authenticated %}
+                <div>
+                    <a href="{% url 'order_list' %}" class="neon-btn">الطلبات</a>
+                    <a href="{% url 'product_list' %}" class="neon-btn">المنتجات</a>
+                    <a href="{% url 'customer_list' %}" class="neon-btn">العملاء</a>
+                </div>
+                <div>
+                    <span style="color: #00f2fe; margin-left: 15px; font-weight: bold;">الموظف: {{ user.username }}</span>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="neon-btn btn-danger">خروج</button>
+                    </form>
+                </div>
+            {% else %}
+                <div>
+                    <span style="color: #00f2fe; font-weight: 900; font-size: 1.2em; letter-spacing: 1px;">نظام إدارة المتجر</span>
+                </div>
+                <div>
+                    <a href="{% url 'login' %}" class="neon-btn" style="margin-left: 10px;">تسجيل الدخول</a>
+                    <a href="{% url 'register' %}" class="neon-btn">إنشاء حساب</a>
+                </div>
+            {% endif %}
+        </nav>
+        
+        {% block content %}{% endblock %}
+        
+    </div>
+</body>
+</html>

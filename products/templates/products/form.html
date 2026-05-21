@@ -1,0 +1,12 @@
+{% extends 'products/base.html' %}
+{% block content %}
+    <h2>{{ title }}</h2>
+    <form method="post" style="max-width: 600px; margin: auto;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="neon-btn">حفظ البيانات</button>
+            <a href="javascript:history.back()" class="neon-btn btn-danger" style="margin-right: 10px;">إلغاء والتراجع</a>
+        </div>
+    </form>
+{% endblock %}

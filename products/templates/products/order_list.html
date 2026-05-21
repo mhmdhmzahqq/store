@@ -1,0 +1,25 @@
+{% extends 'products/base.html' %}
+{% block content %}
+    <h2>سجل الطلبات</h2>
+    {% if perms.products.add_order %}
+        <a href="{% url 'order_create' %}" class="neon-btn">إضافة طلب جديد +</a>
+    {% endif %}
+    <table>
+        <tr><th>رقم الطلب</th><th>العميل</th><th>المنتج</th><th>الكمية</th><th>الإجمالي</th><th>العمليات</th></tr>
+        {% for order in orders %}
+        <tr>
+            <td>#{{ order.id }}</td><td>{{ order.customer.name }}</td>
+            <td>{{ order.product.name }}</td><td>{{ order.quantity }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>
+                {% if perms.products.change_order %}
+                    <a href="{% url 'order_update' order.id %}" class="neon-btn">تعديل</a>
+                {% endif %}
+                {% if perms.products.delete_order %}
+                    <a href="{% url 'order_delete' order.id %}" class="neon-btn btn-danger">حذف</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

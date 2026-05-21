@@ -1,0 +1,10 @@
+{% extends 'products/base.html' %}
+{% block content %}
+    <h2 style="color: #ff4c4c;">تأكيد الحذف</h2>
+    <p style="text-align: center; font-size: 1.2em;">هل أنت متأكد من رغبتك في حذف السجل: <strong>{{ object }}</strong> نهائياً؟</p>
+    <form method="post" style="text-align: center; margin-top: 30px;">
+        {% csrf_token %}
+        <button type="submit" class="neon-btn btn-danger">نعم، تأكيد الحذف</button>
+        <a href="javascript:history.back()" class="neon-btn" style="margin-right: 10px;">إلغاء</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %}
+{% block content %}
+    <h2>{{ title }}</h2>
+    <form method="post" style="max-width: 400px; margin: auto;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div style="text-align: center; margin-top: 25px;">
+            <button type="submit" class="neon-btn">تأكيد البيانات</button>
+        </div>
+    </form>
+    
+    {% if title == 'تسجيل الدخول' %}
+        <p style="text-align: center; margin-top: 20px;">
+            ليس لديك حساب موظف؟ 
+            <a href="{% url 'register' %}" style="color: #66fcf1; text-decoration: none; font-weight: bold;">إنشاء حساب جديد</a>
+        </p>
+    {% else %}
+        <p style="text-align: center; margin-top: 20px;">
+            لديك حساب مسبقاً؟ 
+            <a href="{% url 'login' %}" style="color: #66fcf1; text-decoration: none; font-weight: bold;">تسجيل الدخول</a>
+        </p>
+    {% endif %}
+{% endblock %}
