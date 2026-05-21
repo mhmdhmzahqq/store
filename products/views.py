@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from .models import Customer, Product, Order
 from .forms import CustomerForm, ProductForm, OrderForm
 from rest_framework.generics import ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from .serializers import CustomerSerializer, ProductSerializer, OrderSerializer
 # ==========================================
 # --- نظام الحسابات والمصادقة (FBV) ---
@@ -141,14 +142,17 @@ class OrderDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 class CustomerListCreateAPI(ListCreateAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProductListCreateAPI(ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
 
 class OrderListCreateAPI(ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
 
 
 #********************************************************************************fbv**************************************************************
